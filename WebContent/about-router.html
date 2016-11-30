@@ -1,0 +1,36 @@
+<div class="about-router">
+	<!-- 通栏巨幕开始 -->
+	<div class="jumbotron bg-img">
+		<div class="container">
+			<h2 class="text-center"></h2>
+			 <ol class="breadcrumb text-center">
+			 	<li>
+					<span class="icon icon-home"></span>
+					<a ui-sref="index({id:0})">首页</a></li>
+			 </ol>
+		</div>		
+	</div>
+	<!-- 通栏巨幕结束 -->
+	<!-- 主内容区开始 -->
+	<div class="container main">	
+		<!-- 侧边栏开始 -->
+		<div class="col-md-3 col-xs-12 pull-left">
+
+			<!-- 侧边导航开始 -->
+			<h4 class="page-header aside-header"></h4>
+			<ul class="category_item met_aside_list"></ul>
+			<!-- 侧边导航结束 -->
+
+
+		</div>
+		<!-- 侧边栏结束 -->
+		<!-- 右侧内容开始 -->
+		<div class="col-md-9 col-xs-12 pull-right">
+			<div class="col-xs-12"style="padding-left:0px;">
+				<h4 class="page-header col-md-4"></h4>
+			</div>
+			<div ui-view></div>
+		</div>
+	</div>
+	<!-- 主内容区开始 -->
+</div>

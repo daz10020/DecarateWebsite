@@ -1,0 +1,107 @@
+
+<div>
+	<!-- 通栏巨幕开始 -->
+	<div class="jumbotron bg-img">
+		<div class="container">
+			<h2 class="text-center" ng-bind="childData[1].name"></h2>
+			 <ol class="breadcrumb text-center">
+			 	<li>
+					<span class="icon icon-home"></span>
+					<a ui-sref="index({id:0})">首页</a>
+				</li>
+				 <li>
+					 <a ui-sref="case({id:2})" ng-bind="childData[1].name"></a>
+				 </li>
+				 <li ng-show="breadcrumbFlag">
+					 <a href="javascript:;"ng-bind="rightTitle"></a>
+				 </li>
+
+			 </ol>
+		</div>		
+	</div>
+	<!-- 通栏巨幕结束 -->
+	<!-- 主内容区开始 -->
+	<div class="container main">	
+		<!-- 侧边栏开始 -->
+		<div class="col-md-3 col-xs-12 pull-left">
+			<!-- 搜索框开始 -->
+			<h4 class="page-header">搜索</h4>
+			<div class="input-group">
+				<div class="search-default" ng-show="(searchTipsFlag)" ng-bind="selDefault"></div>
+				<input type="text" placeholder="Search" ng-keyup="keySelect($event)" ng-model="searchCon" class="form-control search">
+				<span class="input-group-addon glyphicon glyphicon-search"></span>
+				<ul class="search-tips" ng-show="(searchTipsFlag)">
+					<li ng-repeat="item in product | filter:{imgtypename:searchCon}" ng-mouseenter="mouseEntSel($index)" ng-click="mouseCliSel($index)" ng-class="{active:($index == keySelNum)}" ng-bind="item.imgtypename"></li>
+				</ul>
+			</div>
+			<!-- 搜索框结束 -->
+			<!-- 侧边导航开始 -->
+			<h4 class="page-header aside-header" ng-bind="childData[1].name" ng-click="rightTitleShow(-1);"></h4>
+			<ul class="category_item met_aside_list">
+				<li class="col-sm-12 col-xs-6 {{'fixed' + (fixNum - $index)}}" data-filter="{{$index}}" ng-repeat="item in childData[1].child" ng-click="rightTitleShow($index);">
+					<a href="javascript:;" ng-bind="item"></a>
+				</li>
+			</ul>
+			<!-- 侧边导航结束 -->
+			<!-- 推荐产品开始 -->
+			<h4 class="page-header">推荐产品</h4>
+			<ul class="single-list">
+				<li class="single_product_item col-xs-12 col-sm-4 text-center">
+					<img src="images/swbg-gg.jpg" alt="">
+					<a>商务办公</a>
+				</li>
+				<li class="single_product_item col-xs-12 col-sm-4 text-center">
+					<img src="images/jzjj-gg.jpg" alt="">
+					<a>精装家居</a>
+				</li>
+				<li class="single_product_item col-xs-12 col-sm-4 text-center">
+					<img src="images/ggss-gg.jpg" alt="">
+					<a>公共设施</a>
+				</li>
+			</ul>
+			<!-- 推荐产品结束 -->
+			<!-- 最新资讯开始 -->
+			<h4 class="page-header">
+				最新咨询
+				<span class="pull-right rechange" ng-click="getNews(4);">
+					<span class="glyphicon glyphicon-refresh rech"></span>换一批
+				</span>
+			</h4>
+			<ul class="post_item">
+				<li ng-repeat="item in leftNews">{{item.newsTime}}
+					<a href="#" ng-bind="item.newsTitle"></a>
+				</li>
+			</ul>
+			<!-- 最新资讯结束 -->
+		</div>
+		<!-- 侧边栏结束 -->
+		<!-- 右侧内容开始 -->
+		<div class="col-md-9 col-xs-12 pull-right">
+			<div class="col-xs-12"style="padding-left:0px;">
+				<h4 class="page-header col-md-4" ng-bind="rightTitle"></h4>
+			</div>
+			<div class="col-xs-12" id="right-con" infinite-scroll="">
+				<ul class="right-list-bg">
+					<li ng-repeat="item in product" class="col-md-4 col-xs-6" ng-class="{'inactive':hidli}">
+						<div class="img-box" >
+							<img src="images/{{item.imgname}}.jpg" alt=""/>
+						</div>
+						<a href="#" ng-bind="item.imgtypename"></a>
+					</li>
+				</ul>
+				<ul class="right-list">
+					<li ng-repeat="item in product | filter:{imgtypename:searchCon,classType:searchNum}" style="position: absolute;top:{{litop($index)}}left: {{lileft($index)}}" class="col-md-4 col-xs-6">
+						<div class="img-box" >
+							<img src="images/{{item.imgname}}.jpg" alt=""/>
+						</div>
+						<a href="#" ng-bind="item.imgtypename"></a>
+
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<!-- 右侧内容结束 -->
+	</div>
+
+</div>
