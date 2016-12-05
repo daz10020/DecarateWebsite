@@ -1,33 +1,33 @@
-//·ÖÀà¿ØÖÆÆ÷
+//åˆ†ç±»æ§åˆ¶å™¨
 var childApp = angular.module('childApp', [])
     .controller('childCtrl', ['$scope', '$stateParams', '$rootScope', function ($scope, $stateParams, $rootScope) {
         $rootScope.pageIndex = $stateParams.id;
 
-        var urlId = $stateParams.id; // »ñµÃ²ÎÊı
-        var container = $('.container'); // ÄÚÈİÇø
+        var urlId = $stateParams.id; // è·å¾—å‚æ•°
+        var container = $('.container'); // å†…å®¹åŒº
         var fixBtnGroup = $('.fixBtnGroup');
-        var title = $('.jumbotron .container'); // ±êÌâÀ¸
-        var breadcrumb = title.find('ol'); // ±êÌâµ¼º½Â·¾¶
-        var leftNavHeader = $('.aside-header'); // ²à±ßµ¼º½Ìõ
-        var rightHeader = $('.pull-right .page-header'); // ÓÒ²àÄÚÈİ±êÌâ
-        var leftnavhtml = ''; // ¶¯Ì¬Ìí¼Ó²à±ßµ¼º½ÄÚÈİ
+        var title = $('.jumbotron .container'); // æ ‡é¢˜æ 
+        var breadcrumb = title.find('ol'); // æ ‡é¢˜å¯¼èˆªè·¯å¾„
+        var leftNavHeader = $('.aside-header'); // ä¾§è¾¹å¯¼èˆªæ¡
+        var rightHeader = $('.pull-right .page-header'); // å³ä¾§å†…å®¹æ ‡é¢˜
+        var leftnavhtml = ''; // åŠ¨æ€æ·»åŠ ä¾§è¾¹å¯¼èˆªå†…å®¹
         var metAsideList = $('.met_aside_list');
 
         childleft(urlId, title, breadcrumb, leftNavHeader, rightHeader, leftnavhtml, metAsideList);
 
-        // »»Ò»Åúµã»÷ÊÂ¼ş
+        // æ¢ä¸€æ‰¹ç‚¹å‡»äº‹ä»¶
         $('.rechange').click(function (event) {
-            // ×ÉÑ¯¶ÔÏó
+            // å’¨è¯¢å¯¹è±¡
             $.getJSON('json/news.txt', function (json, textStatus) {
 
-                // ×îĞÂ×ÊÑ¶
+                // æœ€æ–°èµ„è®¯
                 $('.post_item').empty();
                 var newshtml = '';
-                // ²úÉú4Î»²»ÏàµÈµÄËæ»úÊı
+                // äº§ç”Ÿ4ä½ä¸ç›¸ç­‰çš„éšæœºæ•°
                 var romarr = makeRandom(4, json.length);
-                // ±éÀújson¶ÔÏó
+                // éå†jsonå¯¹è±¡
                 $.each(json, function (index, el) {
-                    // ±éÀúËæ»úÊı
+                    // éå†éšæœºæ•°
                     $.each(romarr, function (i, val) {
 
                         if (index == romarr[i])
@@ -37,40 +37,40 @@ var childApp = angular.module('childApp', [])
                 $('.post_item').html(newshtml);
             })
                 .error(function () {
-                    layer.msg('ÍøÂçÁ¬½Ó´íÎó£¡');
+                    layer.msg('ç½‘ç»œè¿æ¥é”™è¯¯ï¼');
                 });
         });
         $('.rechange').click();
-        // ÓÒ²àÏÔÊ¾ÁĞ±í
+        // å³ä¾§æ˜¾ç¤ºåˆ—è¡¨
         var rightList = container.find('.right-list');
-        //	ËÑË÷¿òÌáÊ¾
+        //	æœç´¢æ¡†æç¤º
         var search = $('.search input').eq(0);
-        // ·ÖÒ³Ò³Âë
+        // åˆ†é¡µé¡µç 
         var pageList = $('.page-list');
-        var filterCon = 1;//³õÊ¼É¸Ñ¡Ìõ¼ş
-        var pageNum = 1;//³õÊ¼Ò³Êı
-        var pageCount;//×ÜÒ³Êı
-        var recordCount = 0;//×Ü¼ÇÂ¼Êı
+        var filterCon = 1;//åˆå§‹ç­›é€‰æ¡ä»¶
+        var pageNum = 1;//åˆå§‹é¡µæ•°
+        var pageCount;//æ€»é¡µæ•°
+        var recordCount = 0;//æ€»è®°å½•æ•°
         var jsonarr = [0, 'product', 'product', 'news']
         var oldStr = 0;
-        // É¸Ñ¡·ûºÏÌõ¼şµÄÍ¼Æ¬
+        // ç­›é€‰ç¬¦åˆæ¡ä»¶çš„å›¾ç‰‡
         function addimgfilter() {
             var classifyhtml = '';
             recordCount = 0;
             $.getJSON('json/' + jsonarr[urlId] + '.txt', function (json, textStatus) {
                 $.each(json, function (index, el) {
                     if (eval(filterCon)) {
-                        // ×ÜĞÅÏ¢ÊıÀÛ¼Ó
+                        // æ€»ä¿¡æ¯æ•°ç´¯åŠ 
                         recordCount++;
                         if (urlId == 1) {
-                            // ·ÖÒ³´¦Àí
+                            // åˆ†é¡µå¤„ç†
                             if (recordCount > 12 * (pageNum - 1) && recordCount <= 12 * pageNum) {
                                 classifyhtml += '<li class="col-md-4 col-xs-6" img-type="' + el.classType + '">';
                                 classifyhtml += '<div class="img-box"><img src="images/' + el.imgname + '.jpg" alt=""></div>';
                                 classifyhtml += '<a href="javascript:;">' + el.imgtypename + '</a></li>';
                             }
                         } else if (urlId == 3) {
-                            // ·ÖÒ³´¦Àí
+                            // åˆ†é¡µå¤„ç†
                             if (recordCount > 6 * (pageNum - 1) && recordCount <= 6 * pageNum) {
                                 classifyhtml += '<li class="col-xs-12" news-type="1">';
                                 classifyhtml += '	<div class="panel panel-default">';
@@ -85,7 +85,7 @@ var childApp = angular.module('childApp', [])
                         }
                     }
                 });
-                // Ìí¼Ó½Úµã
+                // æ·»åŠ èŠ‚ç‚¹
                 rightList.html(classifyhtml);
                 if (urlId == 1) {
                     var ulHeight = Math.ceil(rightList.find('li').length / 3);
@@ -112,18 +112,18 @@ var childApp = angular.module('childApp', [])
                     str = '';
                 }
                 oldStr = filterCon;
-                // ÅĞ¶ÏÊÇ·ñÏÔÊ¾·ÖÒ³°´Å¥
+                // åˆ¤æ–­æ˜¯å¦æ˜¾ç¤ºåˆ†é¡µæŒ‰é’®
                 if (pageNum == 1){
                     filteredCount();
                 }
                 pagenumHl();
             })
                 .error(function () {
-                    alert('ÍøÂçÁ¬½Ó´íÎó');
+                    alert('ç½‘ç»œè¿æ¥é”™è¯¯');
                 });
         }
 
-        // Ò³Âë¸ßÁÁº¯Êı
+        // é¡µç é«˜äº®å‡½æ•°
         function pagenumHl() {
             $.each(pageList.find('li'), function (index, el) {
                 if (pageNum + 1 == index) {
@@ -134,7 +134,7 @@ var childApp = angular.module('childApp', [])
             });
         }
 
-        // ¹ıÂËºóµÄÒ³Êı
+        // è¿‡æ»¤åçš„é¡µæ•°
         function filteredCount() {
             pageCount = 0;
             pageList.find('a.page-num').parent('li').remove();
@@ -154,7 +154,7 @@ var childApp = angular.module('childApp', [])
 
         addimgfilter();
 
-//	É¸Ñ¡ÌáÊ¾ĞÅÏ¢
+//	ç­›é€‰æç¤ºä¿¡æ¯
         function searchStart() {
             var str = search.val();
             fixBtnGroup.removeClass('fixed');
@@ -188,18 +188,18 @@ var childApp = angular.module('childApp', [])
         }
 
         var searchTimeId;
-        //Í£Ö¹ÊäÈë0.5s½øĞĞÉ¸Ñ¡
+        //åœæ­¢è¾“å…¥0.5sè¿›è¡Œç­›é€‰
         search.keyup(function (event) {
             searchTimeId = setTimeout(searchStart, 500);
         });
-        //Á¬ĞøÊäÈë
+        //è¿ç»­è¾“å…¥
         search.keydown(function () {
             clearTimeout(searchTimeId);
         });
         (function () {
-            //É¸Ñ¡Ö´ĞĞÖĞ±êÖ¾Î»
+            //ç­›é€‰æ‰§è¡Œä¸­æ ‡å¿—ä½
             var addAnimateFlag = 0;
-            // ×ó²à²à±ßÀ¸
+            // å·¦ä¾§ä¾§è¾¹æ 
             metAsideList.on('click', 'li', function (event) {
                 fixBtnGroup.removeClass('fixed');
                 if (addAnimateFlag)
@@ -207,17 +207,17 @@ var childApp = angular.module('childApp', [])
                 var classType = $(this).attr('class-type');
                 filterCon = 'el.classType == ' + classType;
                 pageNum = 1;
-                //Çå¿ÕËÑË÷¿ò
+                //æ¸…ç©ºæœç´¢æ¡†
                 search.val('');
-                //ÖØ¸´µã»÷Ïàµ±ÓÚµã»÷×ó²à±êÌâ
+                //é‡å¤ç‚¹å‡»ç›¸å½“äºç‚¹å‡»å·¦ä¾§æ ‡é¢˜
                 if ($(this).hasClass('active')) {
                     leftNavHeader.click();
                     return
                 }
-                //Çå¿ÕÒÑÑ¡ÖĞÌõ¼ş
+                //æ¸…ç©ºå·²é€‰ä¸­æ¡ä»¶
                 removeFilter(metAsideList);
 
-                //µ¥Ñ¡¿ª¹ØÊÂ¼ş
+                //å•é€‰å¼€å…³äº‹ä»¶
                 $(this).toggleClass('active');
 
                 rightList
@@ -237,13 +237,13 @@ var childApp = angular.module('childApp', [])
                 rightHeader.text(text);
             });
 
-            // ×ó²àµ¼º½±êÌâµã»÷
+            // å·¦ä¾§å¯¼èˆªæ ‡é¢˜ç‚¹å‡»
             leftNavHeader.click(function (event) {
                 fixBtnGroup.removeClass('fixed');
 
                 filterCon = 1;
                 pageNum = 1;
-                //Çå¿ÕËÑË÷¿ò
+                //æ¸…ç©ºæœç´¢æ¡†
                 search.val('');
                 addAnimateFlag = 1;
                 rightList
@@ -265,7 +265,7 @@ var childApp = angular.module('childApp', [])
         var prevBtn = $('.prev-btn');
         var nextBtn = $('.next-btn');
         var lastBtn = $('.last-btn');
-        // Ê×Î²Ò³°´Å¥¶¯Ì¬ÏÔÊ¾Òş²Ø
+        // é¦–å°¾é¡µæŒ‰é’®åŠ¨æ€æ˜¾ç¤ºéšè—
         function btnShowHid() {
 
             firstBtn.show();
@@ -282,7 +282,7 @@ var childApp = angular.module('childApp', [])
         }
 
         btnShowHid();
-        //µã»÷·­Ò³ºó¹ö¶¯Ìõ»Øµ½¶¥²¿
+        //ç‚¹å‡»ç¿»é¡µåæ»šåŠ¨æ¡å›åˆ°é¡¶éƒ¨
         $('.pager').click(function (event) {
 
             $('html').animate({scrollTop: $('.right-list').parent('.pull-right').offset().top - 59}, 1000, 'swing', function () {
@@ -292,23 +292,23 @@ var childApp = angular.module('childApp', [])
             });
 
         })
-        // ·­Ò³°´Å¥ÊÂ¼ş
+        // ç¿»é¡µæŒ‰é’®äº‹ä»¶
         pageList.on('click', 'a.page-num', function (event) {
             pageNum = $(this).text();
         });
-        // ÉÏÒ»Ò³
+        // ä¸Šä¸€é¡µ
         prevBtn.click(function (event) {
             pageNum--;
         });
-        // ÏÂÒ»Ò³
+        // ä¸‹ä¸€é¡µ
         nextBtn.click(function (event) {
             pageNum++;
         });
-        // Ê×Ò³
+        // é¦–é¡µ
         firstBtn.click(function (event) {
             pageNum = 1;
         });
-        // Î²Ò³
+        // å°¾é¡µ
         lastBtn.click(function (event) {
             pageNum = pageCount;
         });
@@ -326,43 +326,43 @@ var childApp = angular.module('childApp', [])
 
             var size = 1;
             var imgBox = $('.img-box');
-            //topÆ«ÒÆÁ¿
+            //topåç§»é‡
             function fixTop(index) {
                 if (index >= size * size)
                     index -= (size * size);
                 return Math.floor(index / size) * (450 / size);
             }
 
-            //leftÆ«ÒÆÁ¿
+            //leftåç§»é‡
             function fixLeft(index) {
                 return index % size * (100 / size) + '%';
             }
 
-            //¿í¶È
+            //å®½åº¦
             function fixW(index) {
                 if (index >= size * size)
                     index -= (size * size);
                 return '-' + index % size * (825 / size) + 'px';
             }
 
-            //¸ß¶È
+            //é«˜åº¦
             function fixH(index) {
                 if (index >= size * size)
                     index -= (size * size);
                 return '-' + Math.floor(index / size) * (450 / size) + 'px';
             }
 
-            //µã»÷¾ÛºÏ·ÖÉ¢
+            //ç‚¹å‡»èšåˆåˆ†æ•£
             rightList.on('click', 'li', function () {
-                //Èç¹ûÒÑ¾­¾ÛºÏ½«Æä»¹Ô­
+                //å¦‚æœå·²ç»èšåˆå°†å…¶è¿˜åŸ
                 if ($(this).hasClass('fixed')) {
                     filteredCount();
                     rightList.find('li').each(function (index, el) {
 
                         $(el).removeClass('fixed');
-                        //Òş²Ø·­Ò³°´Å¥
+                        //éšè—ç¿»é¡µæŒ‰é’®
                         fixBtnGroup.removeClass('fixed');
-                        //ÖØÖÃÑùÊ½
+                        //é‡ç½®æ ·å¼
                         $(el).attr('style', '');
                         $(el).css({
                             position: 'absolute',
@@ -371,7 +371,7 @@ var childApp = angular.module('childApp', [])
                         });
                     })
                 } else {
-                    //½«¹ö¶¯Ìõ¹öµ½×îºÏÊÊÎ»ÖÃ
+                    //å°†æ»šåŠ¨æ¡æ»šåˆ°æœ€åˆé€‚ä½ç½®
                     window.scrollTo(0, 280);
 
                     pageList.hide();
@@ -405,7 +405,7 @@ var childApp = angular.module('childApp', [])
 
                 }
             })
-            //    Í¼Æ¬·­Ò³
+            //    å›¾ç‰‡ç¿»é¡µ
             function fixImgMove(num) {
                 window.scrollTo(0, 280);
 
