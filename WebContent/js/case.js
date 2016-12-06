@@ -66,7 +66,8 @@ var caseApp = angular.module('caseApp',[])
         var recordCount = 0;//总记录数
         $scope.product = [];
         $scope.fixNum = -1;
-        var handler = function () {
+        $scope.handler = function () {
+
             var sTop = $window.scrollTop();
             if (sTop > 400 + 415 * (pageNum)) {
                 pageNum++;
@@ -97,12 +98,10 @@ var caseApp = angular.module('caseApp',[])
                     $scope.fixNum = -1;
                 })
             }
-
-
-
         }
         $window = angular.element($window);
-        $window.on('scroll', handler);
+        $window.on('scroll', $scope.handler);
+
         // 右侧内容ajax
         $scope.getProduct = function () {
 
