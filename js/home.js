@@ -46,7 +46,12 @@ homeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider
 
 }]);
 //主页控制器
-homeApp.controller('homeCtrl', ['$stateParams', function ($stateParams) {
+homeApp.controller('homeCtrl', ['$stateParams','$rootScope','$window','$scope', function ($stateParams,$rootScope,$window,$scope) {
+
+    $rootScope.$on('$stateChangeStart', function(){
+        $window = angular.element($window);
+        return $window.off('scroll',$scope.handler);
+    });
     // 传入参数名，返回请求参数值
     function getParams(name) {
         // 带参数的url
